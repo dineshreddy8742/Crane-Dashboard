@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Crane Monitor</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* Dashboard, Alerts, and Settings Layout */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background: #007bff;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a.active {
+            background: #0056b3;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Alerts Section */
+        .alerts {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: inline-block;
+            min-width: 300px;
+        }
+
+        .alert {
+            background: #ffcccc;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 5px solid red;
+            color: red;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        /* Settings Form */
+        .settings form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .settings label {
+            text-align: left;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .settings input {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .settings button {
+            margin-top: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .settings button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#dashboard" onclick="showSection('dashboard')">Dashboard</a>
+        <a href="#alerts" onclick="showSection('alerts')">Alerts</a>
+        <a href="#settings" onclick="showSection('settings')">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="content">
+            
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h1>Crane Monitoring Dashboard</h1>
+                <div class="dashboard">
+                    <div class="card">
+                        <h2>Crane Load Weight</h2>
+                        <p id="loadWeight">Loading...</p>
+                    </div>
+                    <div class="card">
+                        <h2>Crane Angle</h2>
+                        <p id="craneAngle">Loading...</p>
+                    </div>
+                    <div class="card">
+                        <h2>Crane Speed</h2>
+                        <p id="craneSpeed">Loading...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alerts Section -->
+            <section id="alerts" class="section">
+                <h1>Active Alerts</h1>
+                <div class="alerts">
+                    <ul id="alertList"></ul>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <h1>Settings</h1>
+                <div class="settings">
+                    <form id="settingsForm">
+                        <label for="weightThreshold">Weight Threshold (kg):</label>
+                        <input type="number" id="weightThreshold" value="800">
+
+                        <label for="angleThreshold">Angle Threshold (°):</label>
+                        <input type="number" id="angleThreshold" value="75">
+
+                        <label for="speedThreshold">Speed Threshold (m/s):</label>
+                        <input type="number" id="speedThreshold" value="8">
+
+                        <button type="submit">Save Settings</button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        let thresholds = {
+            weight: 800,
+            angle: 75,
+            speed: 8
+        };
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
+            document.querySelector(`.sidebar a[href='#${sectionId}']`).classList.add('active');
+        }
+
+        function getRandomValue(min, max) {
+            return parseFloat((Math.random() * (max - min) + min).toFixed(2));
+        }
+
+        function updateCraneData() {
+            const weight = getRandomValue(500, 1000);
+            const angle = getRandomValue(0, 90);
+            const speed = getRandomValue(0, 10);
+
+            document.getElementById('loadWeight').textContent = `${weight} kg`;
+            document.getElementById('craneAngle').textContent = `${angle}°`;
+            document.getElementById('craneSpeed').textContent = `${speed} m/s`;
+
+            checkAlerts(weight, angle, speed);
+        }
+
+        function checkAlerts(weight, angle, speed) {
+            const alertList = document.getElementById('alertList');
+            alertList.innerHTML = '';
+
+            if (weight > thresholds.weight) {
+                addAlert(`⚠️ Weight exceeds threshold: ${weight} kg`);
+            }
+            if (angle > thresholds.angle) {
+                addAlert(`⚠️ Angle exceeds threshold: ${angle}°`);
+            }
+            if (speed > thresholds.speed) {
+                addAlert(`⚠️ Speed exceeds threshold: ${speed} m/s`);
+            }
+        }
+
+        function addAlert(message) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            li.style.color = 'red';
+            li.style.marginBottom = '5px';
+            document.getElementById('alertList').appendChild(li);
+        }
+
+        document.getElementById('settingsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            thresholds.weight = parseFloat(document.getElementById('weightThreshold').value);
+            thresholds.angle = parseFloat(document.getElementById('angleThreshold').value);
+            thresholds.speed = parseFloat(document.getElementById('speedThreshold').value);
+            alert('Settings updated successfully!');
+        });
+
+        setInterval(updateCraneData, 2000);
+        updateCraneData();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Crane Monitor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .dashboard-cards {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        .card-icon {
+            font-size: 30px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .chart-section {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .chart {
+            width: 45%;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        .analytics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .analytics-table th, .analytics-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .analytics-table th {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Analytics Overview</h1>
+        <select id="timeFilter" onchange="updateAnalytics()">
+        <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+        </select>
+
+        <div class="dashboard-cards">
+            <div class="card">
+                <i class="fas fa-chart-pie card-icon"></i>
+                <h3>Efficiency</h3>
+                <p id="efficiency">--%</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-hourglass-end card-icon"></i>
+                <h3>Downtime</h3>
+                <p id="downtime">-- hrs</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tasks card-icon"></i>
+                <h3>Productivity</h3>
+                <p id="productivity">--%</p>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart">
+                <h3>Efficiency Over Time</h3>
+                <canvas id="efficiencyChart"></canvas>
+            </div>
+            <div class="chart">
+                <h3>Load Distribution</h3>
+                <canvas id="loadChart"></canvas>
+            </div>
+        </div>
+
+        <h3>Recent Analytics Logs</h3>
+        <table class="analytics-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Event</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="analyticsLogs"></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            updateAnalytics();
+        });
+
+        // Function to Generate Random Data
+        function randomData(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+
+        // Update Analytics Data
+        function updateAnalytics() {
+            document.getElementById("efficiency").textContent = randomData(70, 95) + "%";
+            document.getElementById("downtime").textContent = randomData(2, 8) + " hrs";
+            document.getElementById("productivity").textContent = randomData(50, 90) + "%";
+
+            updateCharts();
+            updateLogs();
+        }
+
+        // Update Analytics Logs
+        function updateLogs() {
+            const logs = [
+                { time: "10:30 AM", event: "Crane Load Test", status: "Completed" },
+                { time: "11:00 AM", event: "Maintenance Check", status: "Pending" },
+                { time: "12:15 PM", event: "Emergency Alert", status: "Resolved" }
+            ];
+
+            const logsTable = document.getElementById("analyticsLogs");
+            logsTable.innerHTML = "";
+
+            logs.forEach(log => {
+                const row = `<tr>
+                                <td>${log.time}</td>
+                                <td>${log.event}</td>
+                                <td>${log.status}</td>
+                             </tr>`;
+                logsTable.innerHTML += row;
+            });
+        }
+
+        // Create Charts Using Chart.js
+        function updateCharts() {
+            const ctx1 = document.getElementById('efficiencyChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    datasets: [{
+                        label: "Efficiency",
+                        data: [randomData(80, 95), randomData(80, 95), randomData(80, 95), randomData(80, 95), randomData(80, 95), randomData(80, 95)],
+                        borderColor: "#007bff",
+                        fill: false
+                    }]
+                }
+            });
+
+            const ctx2 = document.getElementById('loadChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: ["Light", "Moderate", "Heavy"],
+                    datasets: [{
+                        data: [40, 35, 25],
+                        backgroundColor: ["#28a745", "#ffc107", "#dc3545"]
+                    }]
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
