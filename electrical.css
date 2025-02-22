@@ -1,0 +1,124 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+/* 🌟 Top Navbar */
+.top-nav {
+    width: 100%;
+    height: 60px;
+    background-color: #1e1e2f;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-nav h2 .highlight {
+    color: #ffcc00;
+}
+
+/* 📚 Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #252539;
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 15px 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sidebar ul li.active, 
+.sidebar ul li:hover {
+    background-color: #ffcc00;
+    color: black;
+}
+
+.sidebar ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ⚡ Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 100px 30px 30px 250px;
+}
+
+.main-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Metrics Section */
+.metrics {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.metric-card {
+    flex: 1 1 200px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.metric-card h4 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.metric-card p {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+/* Charts Section */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.chart-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}

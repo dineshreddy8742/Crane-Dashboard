@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crane Reports - STRIVERS</title>
+    <link rel="stylesheet" href="/reports.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 🚨 Top Navigation -->
+    <header class="top-nav">
+        <h2><span class="highlight">ST</span>RIVERS</h2>
+    </header>
+
+    <!-- 📚 Sidebar with Icons -->
+    <aside class="sidebar">
+        <ul>
+            <li><i class="fas fa-tachometer-alt"></i> <a href="dashboard.html">Dashboard</a></li>
+            <li><i class="fas fa-exclamation-triangle"></i> <a href="alerts.html">Alerts</a></li>
+            <li><i class="fas fa-bolt"></i> <a href="electrical.html">Electrical & Energy</a></li>
+            <li class="active"><i class="fas fa-file-alt"></i> Reports</li>
+            <li><i class="fas fa-cog"></i> <a href="settings.html">Settings</a></li>
+        </ul>
+    </aside>
+
+    <!-- 📜 Main Content: Reports Section -->
+    <main class="main-content">
+        <h3><i class="fas fa-file-alt"></i> Crane Performance Reports</h3>
+
+        <!-- 🕒 Date Filter Section -->
+        <section class="filters">
+            <label for="reportDate">Select Date:</label>
+            <input type="date" id="reportDate">
+            <button onclick="filterReports()">Show Report</button>
+        </section>
+
+        <!-- 📝 Reports Table -->
+        <section class="report-table">
+            <h4>📄 Historical Parameters</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Speed (km/h)</th>
+                        <th>Load (tons)</th>
+                        <th>Power (%)</th>
+                        <th>Fuel (%)</th>
+                        <th>Voltage (V)</th>
+                        <th>Current (A)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="reportTableBody">
+                    <tr>
+                        <td>2025-02-20</td>
+                        <td>40</td>
+                        <td>12</td>
+                        <td>80%</td>
+                        <td>75%</td>
+                        <td>410</td>
+                        <td>370</td>
+                        <td>✅ Normal</td>
+                    </tr>
+                    <tr>
+                        <td>2025-02-19</td>
+                        <td>35</td>
+                        <td>10</td>
+                        <td>78%</td>
+                        <td>70%</td>
+                        <td>415</td>
+                        <td>365</td>
+                        <td>⚠️ Warning</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 📊 Charts for Performance Trends -->
+        <section class="charts">
+            <div class="chart-item">
+                <canvas id="speedLoadTrend"></canvas>
+            </div>
+            <div class="chart-item">
+                <canvas id="powerFuelTrend"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script src="/reports.js"></script>
+</body>
+</html>
