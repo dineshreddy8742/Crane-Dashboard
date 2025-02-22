@@ -3,42 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crane Monitoring Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>STRIVERS - Crane Monitoring System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.getElementById("getStarted").addEventListener("click", function() {
+        window.location.href = "dashboard.html";
+    });
+    </script>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <h2>CRANE MONITOR</h2>
-        <ul>
-            <li onclick="showSection(event, 'dashboard')"><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li onclick="showSection(event, 'analytics')"><a href="analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
-            <li onclick="showSection(event, 'maintenance')"><a href="Maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
-            <li onclick="showSection(event, 'alerts')"><a href="alerts.html"><i class="fas fa-exclamation-triangle"></i> Alerts</a></li>
-            <li onclick="showSection(event, 'settings')"><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
-        </ul>
-    </div>
-    
-    <div class="main-content">
-        <div id="dashboard" class="section">
-            <div class="header">
-                <h1>Crane Operations Dashboard</h1>
+    <!-- Header: STRIVERS -->
+    <header class="header-title">
+        <h1><span class="st-color">ST</span><span class="rivers-color">RIVERS</span></h1>
+    </header>
+
+    <!-- Background with Blur -->
+    <div class="background-container">
+        <div class="overlay"></div>
+        <div class="content-container">
+            <!-- Left Section: Content + Get Started Button -->
+            <div class="left-section">
+                <h2 class="text-animate">Welcome to Crane Monitoring System</h2>
+                <p class="text-animate-delay">Monitor crane operations in real-time, analyze performance, and ensure safety with precision.</p>
+                <a href="dashboard.html"><button id="getStarted" class="btn-animated">Get Started </button></a>
             </div>
-            <div class="dashboard-cards">
-                <div class="card"><i class="fas fa-thermometer-half card-icon"></i><h3>Temperature</h3><p id="temperature">--°C</p></div>
-                <div class="card"><i class="fas fa-vial card-icon"></i><h3>Fuel Level</h3><p id="fuel">--%</p></div>
-                <div class="card"><i class="fas fa-wrench card-icon"></i><h3>Vibration Level</h3><p id="vibration">-- mm/s</p></div>
-                <div class="card"><i class="fas fa-clock card-icon"></i><h3>Operating Hours</h3><p id="uptime">-- hrs</p></div>
-                <div class="card"><i class="fas fa-bolt card-icon"></i><h3>Load Capacity</h3><p id="load">-- tons</p></div>
-            </div>
-            <div class="chart-section">
-                <div class="chart"><h3>Performance Analysis</h3><canvas id="performanceChart"></canvas></div>
-                <div class="chart"><h3>Fuel Consumption Trend</h3><canvas id="fuelChart"></canvas></div>
+
+            <!-- Right Section: Features with Icons & Animation -->
+            <div class="right-section">
+                <h3 class="feature-heading text-animate">Key Features</h3>
+                <div class="feature-item text-animate-delay">
+                    <span>📡</span>
+                    <div>
+                        <h4>Real-Time Monitoring</h4>
+                        <p>Track load, speed, and angle instantly for efficient operations.</p>
+                    </div>
+                </div>
+                <div class="feature-item text-animate-delay">
+                    <span>⚡</span>
+                    <div>
+                        <h4>Instant Alerts</h4>
+                        <p>Receive real-time notifications to avoid operational hazards.</p>
+                    </div>
+                </div>
+                <div class="feature-item text-animate-delay">
+                    <span>📊</span>
+                    <div>
+                        <h4>Performance Insights</h4>
+                        <p>Visualize crane usage data to improve performance metrics.</p>
+                    </div>
+                </div>
+                <div class="feature-item text-animate-delay">
+                    <span>🔒</span>
+                    <div>
+                        <h4>Secure Access</h4>
+                        <p>Ensure secure handling of operational data with encryption.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
