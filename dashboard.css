@@ -54,8 +54,9 @@ body { font-family: 'Segoe UI', sans-serif; display: flex; height: 100vh; overfl
 .card {
     flex: 1; min-width: 180px; background-color: #fff; padding: 18px; border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; font-weight: bold;
+    transition: background-color 0.5s ease; /* Smooth color transition */
 }
-.card span { display: block; font-size: 1.4rem; margin-top: 10px; color: #ffcc00; }
+.card span { display: block; font-size: 1.4rem; margin-top: 10px; }
 
 /* 📈 Charts (2 per row) */
 .charts {
@@ -79,7 +80,19 @@ body { font-family: 'Segoe UI', sans-serif; display: flex; height: 100vh; overfl
     padding: 10px; border-bottom: 1px solid #ddd; font-size: 0.95rem;
 }
 
+/* 🚨 Notification Slide-In Effect */
+.notification {
+    position: relative;
+    right: -100%;
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    0% { right: -100%; opacity: 0; }
+    100% { right: 0; opacity: 1; }
+}
+
 /* ⚡ Responsive */
 @media (max-width: 768px) {
     .charts { grid-template-columns: 1fr; } /* Single column for mobile */
-}
+}  

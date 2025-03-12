@@ -28,14 +28,14 @@
         </ul>
     </aside>
 
-    <!-- 📊 Main Content with Charts -->
-    <main class="main-content">
-        <section class="summary">
-            <div class="card">Speed: <span>45 km/h</span></div>
-            <div class="card">Load: <span>15 tons</span></div>
-            <div class="card">Fuel: <span>78%</span></div>
-            <div class="card">Power: <span>85%</span></div>
-        </section>
+        <!-- 📊 Summary Section with IDs -->
+<main class="main-content">
+    <section class="summary">
+        <div class="card" id="vibration-card">Vibration Levels: <span id="vibration"> mm/s</span></div>
+        <div class="card" id="fuel-card">Fuel Consumption: <span id="fuel">L/hr</span></div>
+        <div class="card" id="hours-card">Operating Hours: <span id="hours">hrs</span></div>
+        <div class="card" id="temperature-card">Temperature: <span id="temperature">°C</span></div>
+    </section>
 
         <section class="charts">
             <div class="chart-item"><canvas id="speedChart"></canvas></div>
@@ -45,17 +45,15 @@
             <div class="chart-item"><canvas id="safetyPieChart"></canvas></div>
             <div class="chart-item"><canvas id="energyPieChart"></canvas></div>
         </section>
+        <!-- 🔔 Notification Panel -->
+<div id="notification-panel" class="notification-panel">
+    <h3>Alerts</h3>
+    <ul id="notifications-list"></ul>
+</div>
+
     </main>
 
-    <!-- 📝 Notification Panel -->
-    <div class="notification-panel" id="notificationPanel">
-        <h3>🔔 Alerts</h3>
-        <ul>
-            <li>⚠️ High Wind Speed Detected!</li>
-            <li>⚡ Voltage Fluctuation Noted on Crane 3</li>
-            <li>🛑 Tilt Angle Critical on Crane 1</li>
-        </ul>
-    </div>
+
 
     <script src="dashboard.js"></script>
 </body>
